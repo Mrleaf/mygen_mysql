@@ -132,8 +132,8 @@ public class ExampleGenerator extends AbstractJavaGenerator {
         commentGenerator.addGeneralMethodComment(method, introspectedTable);
         topLevelClass.addMethod(method);
         
-//        addLimit(topLevelClass,  "limitStart");  //leaf
-//        addLimit(topLevelClass,  "pageSize");  //leaf
+        addLimit(topLevelClass,  "limitStart");  //leaf
+        addLimit(topLevelClass,  "pageSize");  //leaf
         
 if(! my){
         // add field and methods for the list of ored criteria
