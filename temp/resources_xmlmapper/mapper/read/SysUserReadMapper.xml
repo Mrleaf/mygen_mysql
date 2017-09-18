@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.leaf.dao.read.SysUserReadMapper" >
+  <resultMap id="BaseResultMap" type="com.leaf.model.SysUser" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="real_name" property="realName" jdbcType="VARCHAR" />
+    <result column="department" property="department" jdbcType="VARCHAR" />
+    <result column="department_code" property="departmentCode" jdbcType="VARCHAR" />
+    <result column="telephone" property="telephone" jdbcType="VARCHAR" />
+    <result column="office_tel" property="officeTel" jdbcType="VARCHAR" />
+    <result column="station" property="station" jdbcType="VARCHAR" />
+    <result column="station_code" property="stationCode" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="HashMapBaseResultMap" type="hashmap" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="real_name" property="realName" jdbcType="VARCHAR" />
+    <result column="department" property="department" jdbcType="VARCHAR" />
+    <result column="department_code" property="departmentCode" jdbcType="VARCHAR" />
+    <result column="telephone" property="telephone" jdbcType="VARCHAR" />
+    <result column="office_tel" property="officeTel" jdbcType="VARCHAR" />
+    <result column="station" property="station" jdbcType="VARCHAR" />
+    <result column="station_code" property="stationCode" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <if test="example.id != null" >
+         and id = #{example.id,jdbcType=VARCHAR}
+      </if>
+      <if test="example.idList != null  and  example.idList.size() > 0 " >
+         and id in 
+        <foreach collection="example.idList" item="listItem" open="(" close=")" separator="," >
+          #{listItem}
+        </foreach>
+      </if>
+      <if test="example.userName != null" >
+         and user_name = #{example.userName,jdbcType=VARCHAR}
+      </if>
+      <if test="example.userNameList != null  and  example.userNameList.size() > 0 " >
+         and user_name in 
+        <foreach collection="example.userNameList" item="listItem" open="(" close=")" separator="," >
+          #{listItem}
+        </foreach>
+      </if>
+      <if test="example.password != null" >
+         and password = #{example.password,jdbcType=VARCHAR}
+      </if>
+      <if test="example.passwordList != null  and  example.passwordList.size() > 0 " >
+         and password in 
+        <foreach collection="example.passwordList" item="listItem" open="(" close=")" separator="," >
+          #{listItem}
+        </foreach>
+      </if>
+      <if test="example.realName != null" >
+         and real_name = #{example.realName,jdbcType=VARCHAR}
+      </if>
+      <if test="example.realNameList != null  and  example.realNameList.size() > 0 " >
+         and real_name in 
+        <foreach collection="example.realNameList" item="listItem" open="(" close=")" separator="," >
+          #{listItem}
+        </foreach>
+      </if>
+      <if test="example.department != null" >
+         and department = #{example.department,jdbcType=VARCHAR}
+      </if>
+      <if test="example.departmentList != null  and  example.departmentList.size() > 0 " >
+         and department in 
+        <foreach collection="example.departmentList" item="listItem" open="(" close=")" separator="," >
+          #{listItem}
+        </foreach>
+      </if>
+      <if test="example.departmentCode != null" >
+         and department_code = #{example.departmentCode,jdbcType=VARCHAR}
+      </if>
+      <if test="example.departmentCodeList != null  and  example.departmentCodeList.size() > 0 " >
+         and department_code in 
+        <foreach collection="example.departmentCodeList" item="listItem" open="(" close=")" separator="," >
+          #{listItem}
+        </foreach>
+      </if>
+      <if test="example.telephone != null" >
+         and telephone = #{example.telephone,jdbcType=VARCHAR}
+      </if>
+      <if test="example.telephoneList != null  and  example.telephoneList.size() > 0 " >
+         and telephone in 
+        <foreach collection="example.telephoneList" item="listItem" open="(" close=")" separator="," >
+          #{listItem}
+        </foreach>
+      </if>
+      <if test="example.officeTel != null" >
+         and office_tel = #{example.officeTel,jdbcType=VARCHAR}
+      </if>
+      <if test="example.officeTelList != null  and  example.officeTelList.size() > 0 " >
+         and office_tel in 
+        <foreach collection="example.officeTelList" item="listItem" open="(" close=")" separator="," >
+          #{listItem}
+        </foreach>
+      </if>
+      <if test="example.station != null" >
+         and station = #{example.station,jdbcType=VARCHAR}
+      </if>
+      <if test="example.stationList != null  and  example.stationList.size() > 0 " >
+         and station in 
+        <foreach collection="example.stationList" item="listItem" open="(" close=")" separator="," >
+          #{listItem}
+        </foreach>
+      </if>
+      <if test="example.stationCode != null" >
+         and station_code = #{example.stationCode,jdbcType=VARCHAR}
+      </if>
+      <if test="example.stationCodeList != null  and  example.stationCodeList.size() > 0 " >
+         and station_code in 
+        <foreach collection="example.stationCodeList" item="listItem" open="(" close=")" separator="," >
+          #{listItem}
+        </foreach>
+      </if>
+      <if test="example.status != null" >
+         and status = #{example.status,jdbcType=INTEGER}
+      </if>
+      <if test="example.statusList != null  and  example.statusList.size() > 0 " >
+         and status in 
+        <foreach collection="example.statusList" item="listItem" open="(" close=")" separator="," >
+          #{listItem}
+        </foreach>
+      </if>
+      <if test="example.remark != null" >
+         and remark = #{example.remark,jdbcType=VARCHAR}
+      </if>
+      <if test="example.remarkList != null  and  example.remarkList.size() > 0 " >
+         and remark in 
+        <foreach collection="example.remarkList" item="listItem" open="(" close=")" separator="," >
+          #{listItem}
+        </foreach>
+      </if>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, user_name, password, real_name, department, department_code, telephone, office_tel, 
+    station, station_code, status, remark
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="map" >
+    select
+    <if test="example.distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sys_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="example.orderByClause != null" >
+      order by ${example.orderByClause}
+    </if>
+    <if test="example.limitStart >= 0 and example.pageSize > 0 " >
+      limit #{example.limitStart} , #{example.pageSize}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="map" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_user
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="countByExample" parameterType="map" resultType="java.lang.Integer" >
+    select count(*) from sys_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <select id="selectByExampleForOne" resultMap="BaseResultMap" parameterType="map" >
+    select
+    <if test="example.distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sys_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="example.orderByClause != null" >
+      order by ${example.orderByClause}
+    </if>
+     limit 0 , 1 
+  </select>
+  <select id="selectMapByPrimaryKey" resultMap="HashMapBaseResultMap" parameterType="map" >
+    select
+    <include refid="Base_Column_List" />
+    from sys_user
+    <where >
+       and id=#{id,jdbcType=VARCHAR}
+    </where>
+  </select>
+  <select id="selectMapByExampleForOne" resultMap="HashMapBaseResultMap" parameterType="map" >
+    select
+    <if test="example.distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sys_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="example.orderByClause != null" >
+      order by ${example.orderByClause}
+    </if>
+     limit 0 , 1 
+  </select>
+  <select id="selectMapByExample" resultMap="HashMapBaseResultMap" parameterType="map" >
+    select
+    <if test="example.distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sys_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="example.orderByClause != null" >
+      order by ${example.orderByClause}
+    </if>
+    <if test="example.limitStart >= 0 and example.pageSize > 0 " >
+      limit #{example.limitStart} , #{example.pageSize}
+    </if>
+  </select>
+</mapper>

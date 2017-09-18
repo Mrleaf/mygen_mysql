@@ -5,8 +5,8 @@
 
 <generatorConfiguration>
 
-	<!-- <classPathEntry location="./generator/mysql-connector-java-5.1.6-bin.jar" /> -->
-	<classPathEntry location="‪‪D://MavenStore//mysql//mysql-connector-java//5.1.6//mysql-connector-java-5.1.6.jar" />
+	 <classPathEntry location="./generator/mysql-connector-java-5.1.6.jar" />
+	<!--<classPathEntry location="‪‪‪D:\MavenStore\mysql\mysql-connector-java\5.1.6\mysql-connector-java-5.1.6.jar" />-->
 	<context id="emerchant" targetRuntime="MyBatis3">
 		<plugin type="org.mybatis.generator.plugins.RenameExampleClassPlugin">
 			<property name="searchString" value="Example$" />
@@ -30,8 +30,8 @@
 		</commentGenerator>
 
 		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
-						connectionURL="jdbc:mysql://192.168.188.145:3306/qpm_2.0" userId="root"
-						password="root">
+						connectionURL="jdbc:mysql://192.168.110.116:3306/TJSCJG" userId="tjscjg"
+						password="tjscjg">
 			<!-- 针对mysql数据库 注解-->
     		<property name="useInformationSchema" value="true"></property>
 		</jdbcConnection>
@@ -40,21 +40,21 @@
 		</javaTypeResolver>
 		
 		<!-- 自动生成代码的位置 -->
-		<javaModelGenerator targetPackage="com.leaf.model" targetProject="src/main/java">
+		<javaModelGenerator targetPackage="com.leaf.model" targetProject="temp/src_model">
 			<property name="enableSubPackages" value="false" />
 			<property name="trimStrings" value="true" />
 		</javaModelGenerator>
 		
-		<sqlMapGenerator targetPackage="mapper"  targetProject="src/main/java">
+		<sqlMapGenerator targetPackage="mapper"  targetProject="temp/resources_xmlmapper">
 			<property name="enableSubPackages" value="false" />
 		</sqlMapGenerator>
 		
-		<javaClientGenerator type="XMLMAPPER" targetPackage="com.leaf.dao" targetProject="src/main/java">
+		<javaClientGenerator type="XMLMAPPER" targetPackage="com.leaf.dao" targetProject="temp/src_javamapper">
 			<property name="enableSubPackages" value="false" />
 		</javaClientGenerator>
 
 
-		<table schema="my" tableName="T_TEST"   domainObjectName="TTest"/>
+		<table  tableName="sys_user"   domainObjectName="SysUser"/>
 	
 	
 	

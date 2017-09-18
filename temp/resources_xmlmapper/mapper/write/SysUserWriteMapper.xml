@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.leaf.dao.write.SysUserWriteMapper" >
+  <sql id="Example_Where_Clause" >
+    <where >
+      <if test="example.id != null" >
+         and id = #{example.id,jdbcType=VARCHAR}
+      </if>
+      <if test="example.idList != null  and  example.idList.size() > 0 " >
+         and id in 
+        <foreach collection="example.idList" item="listItem" open="(" close=")" separator="," >
+          #{listItem}
+        </foreach>
+      </if>
+      <if test="example.userName != null" >
+         and user_name = #{example.userName,jdbcType=VARCHAR}
+      </if>
+      <if test="example.userNameList != null  and  example.userNameList.size() > 0 " >
+         and user_name in 
+        <foreach collection="example.userNameList" item="listItem" open="(" close=")" separator="," >
+          #{listItem}
+        </foreach>
+      </if>
+      <if test="example.password != null" >
+         and password = #{example.password,jdbcType=VARCHAR}
+      </if>
+      <if test="example.passwordList != null  and  example.passwordList.size() > 0 " >
+         and password in 
+        <foreach collection="example.passwordList" item="listItem" open="(" close=")" separator="," >
+          #{listItem}
+        </foreach>
+      </if>
+      <if test="example.realName != null" >
+         and real_name = #{example.realName,jdbcType=VARCHAR}
+      </if>
+      <if test="example.realNameList != null  and  example.realNameList.size() > 0 " >
+         and real_name in 
+        <foreach collection="example.realNameList" item="listItem" open="(" close=")" separator="," >
+          #{listItem}
+        </foreach>
+      </if>
+      <if test="example.department != null" >
+         and department = #{example.department,jdbcType=VARCHAR}
+      </if>
+      <if test="example.departmentList != null  and  example.departmentList.size() > 0 " >
+         and department in 
+        <foreach collection="example.departmentList" item="listItem" open="(" close=")" separator="," >
+          #{listItem}
+        </foreach>
+      </if>
+      <if test="example.departmentCode != null" >
+         and department_code = #{example.departmentCode,jdbcType=VARCHAR}
+      </if>
+      <if test="example.departmentCodeList != null  and  example.departmentCodeList.size() > 0 " >
+         and department_code in 
+        <foreach collection="example.departmentCodeList" item="listItem" open="(" close=")" separator="," >
+          #{listItem}
+        </foreach>
+      </if>
+      <if test="example.telephone != null" >
+         and telephone = #{example.telephone,jdbcType=VARCHAR}
+      </if>
+      <if test="example.telephoneList != null  and  example.telephoneList.size() > 0 " >
+         and telephone in 
+        <foreach collection="example.telephoneList" item="listItem" open="(" close=")" separator="," >
+          #{listItem}
+        </foreach>
+      </if>
+      <if test="example.officeTel != null" >
+         and office_tel = #{example.officeTel,jdbcType=VARCHAR}
+      </if>
+      <if test="example.officeTelList != null  and  example.officeTelList.size() > 0 " >
+         and office_tel in 
+        <foreach collection="example.officeTelList" item="listItem" open="(" close=")" separator="," >
+          #{listItem}
+        </foreach>
+      </if>
+      <if test="example.station != null" >
+         and station = #{example.station,jdbcType=VARCHAR}
+      </if>
+      <if test="example.stationList != null  and  example.stationList.size() > 0 " >
+         and station in 
+        <foreach collection="example.stationList" item="listItem" open="(" close=")" separator="," >
+          #{listItem}
+        </foreach>
+      </if>
+      <if test="example.stationCode != null" >
+         and station_code = #{example.stationCode,jdbcType=VARCHAR}
+      </if>
+      <if test="example.stationCodeList != null  and  example.stationCodeList.size() > 0 " >
+         and station_code in 
+        <foreach collection="example.stationCodeList" item="listItem" open="(" close=")" separator="," >
+          #{listItem}
+        </foreach>
+      </if>
+      <if test="example.status != null" >
+         and status = #{example.status,jdbcType=INTEGER}
+      </if>
+      <if test="example.statusList != null  and  example.statusList.size() > 0 " >
+         and status in 
+        <foreach collection="example.statusList" item="listItem" open="(" close=")" separator="," >
+          #{listItem}
+        </foreach>
+      </if>
+      <if test="example.remark != null" >
+         and remark = #{example.remark,jdbcType=VARCHAR}
+      </if>
+      <if test="example.remarkList != null  and  example.remarkList.size() > 0 " >
+         and remark in 
+        <foreach collection="example.remarkList" item="listItem" open="(" close=")" separator="," >
+          #{listItem}
+        </foreach>
+      </if>
+    </where>
+  </sql>
+  <delete id="deleteByPrimaryKey" parameterType="map" >
+    delete from sys_user
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="map" >
+    delete from sys_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="map" >
+    insert into sys_user (id, user_name, password, 
+      real_name, department, department_code, 
+      telephone, office_tel, station, 
+      station_code, status, remark
+      )
+    values (#{record.id,jdbcType=VARCHAR}, #{record.userName,jdbcType=VARCHAR}, #{record.password,jdbcType=VARCHAR}, 
+      #{record.realName,jdbcType=VARCHAR}, #{record.department,jdbcType=VARCHAR}, #{record.departmentCode,jdbcType=VARCHAR}, 
+      #{record.telephone,jdbcType=VARCHAR}, #{record.officeTel,jdbcType=VARCHAR}, #{record.station,jdbcType=VARCHAR}, 
+      #{record.stationCode,jdbcType=VARCHAR}, #{record.status,jdbcType=INTEGER}, #{record.remark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="map" >
+    insert into sys_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="record.id != null" >
+        id,
+      </if>
+      <if test="record.userName != null" >
+        user_name,
+      </if>
+      <if test="record.password != null" >
+        password,
+      </if>
+      <if test="record.realName != null" >
+        real_name,
+      </if>
+      <if test="record.department != null" >
+        department,
+      </if>
+      <if test="record.departmentCode != null" >
+        department_code,
+      </if>
+      <if test="record.telephone != null" >
+        telephone,
+      </if>
+      <if test="record.officeTel != null" >
+        office_tel,
+      </if>
+      <if test="record.station != null" >
+        station,
+      </if>
+      <if test="record.stationCode != null" >
+        station_code,
+      </if>
+      <if test="record.status != null" >
+        status,
+      </if>
+      <if test="record.remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="record.id != null" >
+        #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userName != null" >
+        #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null" >
+        #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.realName != null" >
+        #{record.realName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.department != null" >
+        #{record.department,jdbcType=VARCHAR},
+      </if>
+      <if test="record.departmentCode != null" >
+        #{record.departmentCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.telephone != null" >
+        #{record.telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.officeTel != null" >
+        #{record.officeTel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.station != null" >
+        #{record.station,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stationCode != null" >
+        #{record.stationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.remark != null" >
+        #{record.remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sys_user
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userName != null" >
+        user_name = #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null" >
+        password = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.realName != null" >
+        real_name = #{record.realName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.department != null" >
+        department = #{record.department,jdbcType=VARCHAR},
+      </if>
+      <if test="record.departmentCode != null" >
+        department_code = #{record.departmentCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.telephone != null" >
+        telephone = #{record.telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.officeTel != null" >
+        office_tel = #{record.officeTel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.station != null" >
+        station = #{record.station,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stationCode != null" >
+        station_code = #{record.stationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sys_user
+    set id = #{record.id,jdbcType=VARCHAR},
+      user_name = #{record.userName,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR},
+      real_name = #{record.realName,jdbcType=VARCHAR},
+      department = #{record.department,jdbcType=VARCHAR},
+      department_code = #{record.departmentCode,jdbcType=VARCHAR},
+      telephone = #{record.telephone,jdbcType=VARCHAR},
+      office_tel = #{record.officeTel,jdbcType=VARCHAR},
+      station = #{record.station,jdbcType=VARCHAR},
+      station_code = #{record.stationCode,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=INTEGER},
+      remark = #{record.remark,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="map" >
+    update sys_user
+    <set >
+      <if test="record.userName != null" >
+        user_name = #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null" >
+        password = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.realName != null" >
+        real_name = #{record.realName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.department != null" >
+        department = #{record.department,jdbcType=VARCHAR},
+      </if>
+      <if test="record.departmentCode != null" >
+        department_code = #{record.departmentCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.telephone != null" >
+        telephone = #{record.telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.officeTel != null" >
+        office_tel = #{record.officeTel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.station != null" >
+        station = #{record.station,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stationCode != null" >
+        station_code = #{record.stationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{record.id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="map" >
+    update sys_user
+    set user_name = #{record.userName,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR},
+      real_name = #{record.realName,jdbcType=VARCHAR},
+      department = #{record.department,jdbcType=VARCHAR},
+      department_code = #{record.departmentCode,jdbcType=VARCHAR},
+      telephone = #{record.telephone,jdbcType=VARCHAR},
+      office_tel = #{record.officeTel,jdbcType=VARCHAR},
+      station = #{record.station,jdbcType=VARCHAR},
+      station_code = #{record.stationCode,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=INTEGER},
+      remark = #{record.remark,jdbcType=VARCHAR}
+    where id = #{record.id,jdbcType=VARCHAR}
+  </update>
+</mapper>
