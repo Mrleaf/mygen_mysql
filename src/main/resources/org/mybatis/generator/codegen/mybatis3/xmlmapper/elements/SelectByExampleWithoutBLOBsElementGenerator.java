@@ -75,11 +75,11 @@ public class SelectByExampleWithoutBLOBsElementGenerator extends
         ifElement.addElement(new TextElement("order by ${example.orderByClause}")); //$NON-NLS-1$
         answer.addElement(ifElement);
         
-        XmlElement isNotNullElement = new XmlElement("if"); //$NON-NLS-1$
-        isNotNullElement.addAttribute(new Attribute("test", "example.limitStart >= 0 and example.pageSize > 0 ")); //$NON-NLS-1$ //$NON-NLS-2$
-        isNotNullElement.addElement(new TextElement(
-                "limit #{example.limitStart} , #{example.pageSize}"));
-        answer.addElement(isNotNullElement);  //leaf
+//        XmlElement isNotNullElement = new XmlElement("if"); //$NON-NLS-1$
+//        isNotNullElement.addAttribute(new Attribute("test", "example.limitStart >= 0 and example.pageSize > 0 ")); //$NON-NLS-1$ //$NON-NLS-2$
+//        isNotNullElement.addElement(new TextElement(
+//                "limit #{example.limitStart} , #{example.pageSize}"));
+//        answer.addElement(isNotNullElement);  //leaf
 
         if (context.getPlugins()
                 .sqlMapSelectByExampleWithoutBLOBsElementGenerated(answer,

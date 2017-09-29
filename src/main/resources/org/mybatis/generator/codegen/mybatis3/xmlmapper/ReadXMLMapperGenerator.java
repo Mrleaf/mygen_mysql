@@ -377,11 +377,11 @@ public class ReadXMLMapperGenerator extends AbstractXmlGenerator {
 		ifThree.addElement(new TextElement("order by ${example.orderByClause}"));
 		selectMapList.addElement(ifThree);
 		
-		XmlElement pageElement = new XmlElement("if"); //$NON-NLS-1$
-		pageElement.addAttribute(new Attribute("test", "example.limitStart >= 0 and example.pageSize > 0 ")); //$NON-NLS-1$ //$NON-NLS-2$
-		pageElement.addElement(new TextElement(
-                "limit #{example.limitStart} , #{example.pageSize}"));
-        selectMapList.addElement(pageElement);//leaf
+//		XmlElement pageElement = new XmlElement("if"); //$NON-NLS-1$
+//		pageElement.addAttribute(new Attribute("test", "example.limitStart >= 0 and example.pageSize > 0 ")); //$NON-NLS-1$ //$NON-NLS-2$
+//		pageElement.addElement(new TextElement(
+//                "limit #{example.limitStart} , #{example.pageSize}"));
+//        selectMapList.addElement(pageElement);//leaf
 		
 		rootElement.addElement(selectMapList);
 	
