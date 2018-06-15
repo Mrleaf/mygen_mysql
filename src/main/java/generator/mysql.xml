@@ -5,8 +5,7 @@
 
 <generatorConfiguration>
 
-	 <classPathEntry location="./generator/mysql-connector-java-5.1.6.jar" />
-	<!--<classPathEntry location="‪‪‪D:\MavenStore\mysql\mysql-connector-java\5.1.6\mysql-connector-java-5.1.6.jar" />-->
+	<classPathEntry location="E:\MavenStore\mysql\mysql-connector-java\5.1.6\mysql-connector-java-5.1.6.jar" />
 	<context id="emerchant" targetRuntime="MyBatis3">
 		<plugin type="org.mybatis.generator.plugins.RenameExampleClassPlugin">
 			<property name="searchString" value="Example$" />
@@ -22,7 +21,7 @@
 		
 		<plugin type="org.mybatis.generator.plugins.HumanReadableCommentPlugin"></plugin>
 		
-		<!-- <plugin type="org.mybatis.generator.plugins.MysqlKeyAutoIncrementPlugin"></plugin> -->
+		 <!--<plugin type="org.mybatis.generator.plugins.MysqlKeyAutoIncrementPlugin"></plugin>-->
 		
 		<commentGenerator>
 			<property name="suppressAllComments" value="true" />
@@ -30,8 +29,8 @@
 		</commentGenerator>
 
 		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
-						connectionURL="jdbc:mysql://192.168.110.116:3306/TJSCJG" userId="tjscjg"
-						password="tjscjg">
+						connectionURL="jdbc:mysql://192.168.11.228:3306/TJSCJG?useUnicode=true&amp;characterEncoding=UTF-8" userId="admin"
+						password="admin">
 			<!-- 针对mysql数据库 注解-->
     		<property name="useInformationSchema" value="true"></property>
 		</jdbcConnection>
@@ -40,21 +39,23 @@
 		</javaTypeResolver>
 		
 		<!-- 自动生成代码的位置 -->
-		<javaModelGenerator targetPackage="com.leaf.model" targetProject="temp/src_model">
+		<javaModelGenerator targetPackage="com.zxgs.model" targetProject="target/src_model">
 			<property name="enableSubPackages" value="false" />
 			<property name="trimStrings" value="true" />
 		</javaModelGenerator>
-		
-		<sqlMapGenerator targetPackage="mapper"  targetProject="temp/resources_xmlmapper">
+
+		<sqlMapGenerator targetPackage="mapper"  targetProject="target/resources_xmlmapper">
 			<property name="enableSubPackages" value="false" />
 		</sqlMapGenerator>
-		
-		<javaClientGenerator type="XMLMAPPER" targetPackage="com.leaf.dao" targetProject="temp/src_javamapper">
+
+		<javaClientGenerator type="XMLMAPPER" targetPackage="com.zxgs.dao" targetProject="target/src_javamapper">
 			<property name="enableSubPackages" value="false" />
 		</javaClientGenerator>
 
 
-		<table  tableName="sys_user"   domainObjectName="SysUser"/>
+		<table  tableName="t_case_info"   domainObjectName="TCaseInfo"/>
+
+
 	
 	
 	
