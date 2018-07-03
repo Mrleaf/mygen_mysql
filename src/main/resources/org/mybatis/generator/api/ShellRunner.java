@@ -50,11 +50,11 @@ public class ShellRunner {
     private static final String HELP_1 = "-?"; //$NON-NLS-1$
     private static final String HELP_2 = "-h"; //$NON-NLS-1$
 
-    public static void main(String[] args) {
+    public static MyBatisGenerator main(String[] args) {
         if (args.length == 0) {
             usage();
             System.exit(0);
-            return; // only to satisfy compiler, never returns
+            return null; // only to satisfy compiler, never returns leaf
         }
 
         Map<String, String> arguments = parseCommandLine(args);
@@ -62,12 +62,12 @@ public class ShellRunner {
         if (arguments.containsKey(HELP_1)) {
             usage();
             System.exit(0);
-            return; // only to satisfy compiler, never returns
+            return null; // only to satisfy compiler, never returns leaf
         }
 
         if (!arguments.containsKey(CONFIG_FILE)) {
             writeLine(getString("RuntimeError.0")); //$NON-NLS-1$
-            return;
+            return null;//leaf
         }
 
         List<String> warnings = new ArrayList<String>();
@@ -76,7 +76,7 @@ public class ShellRunner {
         File configurationFile = new File(configfile);
         if (!configurationFile.exists()) {
             writeLine(getString("RuntimeError.1", configfile)); //$NON-NLS-1$
-            return;
+            return null; //leaf
         }
 
         Set<String> fullyqualifiedTables = new HashSet<String>();
@@ -101,7 +101,7 @@ public class ShellRunner {
                 }
             }
         }
-
+        MyBatisGenerator myBatisGenerator = null;
         try {
             ConfigurationParser cp = new ConfigurationParser(warnings);
             Configuration config = cp.parseConfiguration(configurationFile);
@@ -109,13 +109,12 @@ public class ShellRunner {
             DefaultShellCallback shellCallback = new DefaultShellCallback(
                     arguments.containsKey(OVERWRITE));
 
-            MyBatisGenerator myBatisGenerator = new MyBatisGenerator(config, shellCallback, warnings);
+            myBatisGenerator = new MyBatisGenerator(config, shellCallback, warnings);
 
             ProgressCallback progressCallback = arguments.containsKey(VERBOSE) ? new VerboseProgressCallback()
                     : null;
 
             myBatisGenerator.generate(progressCallback, contexts, fullyqualifiedTables);
-
         } catch (XMLParserException e) {
             writeLine(getString("Progress.3")); //$NON-NLS-1$
             writeLine();
@@ -123,19 +122,19 @@ public class ShellRunner {
                 writeLine(error);
             }
 
-            return;
+            return null; //leaf
         } catch (SQLException e) {
             e.printStackTrace();
-            return;
+            return null; //leaf
         } catch (IOException e) {
             e.printStackTrace();
-            return;
+            return null; //leaf
         } catch (InvalidConfigurationException e) {
             writeLine(getString("Progress.16")); //$NON-NLS-1$
             for (String error : e.getErrors()) {
                 writeLine(error);
             }
-            return;
+            return null; //leaf
         } catch (InterruptedException e) {
             // ignore (will never happen with the DefaultShellCallback)
             ;
@@ -151,6 +150,7 @@ public class ShellRunner {
             writeLine();
             writeLine(getString("Progress.5")); //$NON-NLS-1$
         }
+        return myBatisGenerator;
     }
 
     private static void usage() {

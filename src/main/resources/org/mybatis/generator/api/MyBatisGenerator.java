@@ -67,6 +67,14 @@ public class MyBatisGenerator {
     private List<String> warnings;
 
     private Set<String> projects;
+    //leaf
+    public Configuration getConfiguration() {
+        return configuration;
+    }
+    //leaf
+    public void setConfiguration(Configuration configuration) {
+        this.configuration = configuration;
+    }
 
     /**
      * Constructs a MyBatisGenerator object.

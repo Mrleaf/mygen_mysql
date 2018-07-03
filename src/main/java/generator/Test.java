@@ -7,15 +7,45 @@ import java.util.List;
 
 public class Test {
     public static void main(String[] args) {
-        String str ="t_market_businessman";
+        String str ="dic_department\n" +
+                ",key_entity_cancelled\n" +
+                ",key_entity_info\n" +
+                ",key_entity_station\n" +
+                ",key_entity_type\n" +
+                ",sys_dictionary\n" +
+                ",sys_log\n" +
+                ",sys_user\n" +
+                ",t_complaints_consult\n" +
+                ",t_complaints_consumenature\n" +
+                ",t_complaints_consumetype\n" +
+                ",t_complaints_crimetype\n" +
+                ",t_complaints_history\n" +
+                ",t_complaints_history2\n" +
+                ",t_complaints_info\n" +
+                ",t_complaints_info2\n" +
+                ",t_complaints_items\n" +
+                ",t_complaints_laws\n" +
+                ",t_complaints_mitigation\n" +
+                ",t_complaints_punlish\n" +
+                ",t_complaints_status\n" +
+                ",t_complaints_violate\n" +
+                ",t_file_info\n" +
+                ",t_law_menu\n" +
+                ",t_task_check_groups_bak\n" +
+                ",t_task_check_item\n" +
+                ",t_task_entity\n" +
+                ",t_task_info\n" +
+                ",t_task_items\n" +
+                ",t_task_log\n" +
+                ",t_task_result\n";
         toTableXml(str);
-        toDataConfigXml(str);
-        System.out.println("-------");
-        managedSchema(str);
-        str = "t_lic_equipment_producted";
-        System.out.println(toCamelCase(str));
-        System.out.println(toCapitalizeCamelCase(str));
-        System.out.println(toUnderlineName(str));
+//        toDataConfigXml(str);
+//        System.out.println("-------");
+//        managedSchema(str);
+//        str = "t_lic_equipment_producted";
+//        System.out.println(toCamelCase(str));
+//        System.out.println(toCapitalizeCamelCase(str));
+//        System.out.println(toUnderlineName(str));
 
     }
 

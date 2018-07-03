@@ -4,6 +4,7 @@
 package generator;
 
 
+import org.mybatis.generator.api.MyBatisGenerator;
 import org.mybatis.generator.api.ShellRunner;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -50,11 +51,15 @@ public class Mybatis3CodeGenerator {
 			//防止中文路径乱码
 			System.out.println(java.net.URLDecoder.decode(config.getFile(), "utf-8"));
 			String[] arg = {"-configfile", java.net.URLDecoder.decode(config.getFile(), "utf-8"), "-overwrite"};
-			ShellRunner.main(arg);
+			MyBatisGenerator generator =  ShellRunner.main(arg);
+			//防止中文路径乱码
+			String path1 = "E:/MyWork/mygen_mysql/target/TS";
+			CreateTS.CreateFile(path1,generator);
 		}catch (Exception e){
 			e.printStackTrace();
 		}
-
 	}
+
+
 
 }

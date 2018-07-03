@@ -382,6 +382,14 @@ public class Context extends PropertyHolder {
     //
 
     private List<IntrospectedTable> introspectedTables;
+    //leaf
+    public List<IntrospectedTable> getIntrospectedTables() {
+        return introspectedTables;
+    }
+    //leaf
+    public void setIntrospectedTables(List<IntrospectedTable> introspectedTables) {
+        this.introspectedTables = introspectedTables;
+    }
 
     public int getIntrospectionSteps() {
         int steps = 0;
