@@ -53,8 +53,8 @@ public class Mybatis3CodeGenerator {
 			String[] arg = {"-configfile", java.net.URLDecoder.decode(config.getFile(), "utf-8"), "-overwrite"};
 			MyBatisGenerator generator =  ShellRunner.main(arg);
 			//防止中文路径乱码
-			String path1 = "E:/MyWork/mygen_mysql/target/TS";
-			CreateTS.CreateFile(path1,generator);
+//			String path1 = "E:/MyWork/mygen_mysql/target/TS";
+//			CreateTS.CreateFile(path1,generator);
 		}catch (Exception e){
 			e.printStackTrace();
 		}

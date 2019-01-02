@@ -27,6 +27,7 @@ import static org.mybatis.generator.internal.util.messages.Messages.getString;
 import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -573,7 +574,7 @@ public class DatabaseIntrospector {
 
     private List<IntrospectedTable> calculateIntrospectedTables(
             TableConfiguration tc,
-            Map<ActualTableName, List<IntrospectedColumn>> columns) {
+            Map<ActualTableName, List<IntrospectedColumn>> columns)throws SQLException {
         boolean delimitIdentifiers = tc.isDelimitIdentifiers()
                 || stringContainsSpace(tc.getCatalog())
                 || stringContainsSpace(tc.getSchema())
@@ -584,7 +585,6 @@ public class DatabaseIntrospector {
         for (Map.Entry<ActualTableName, List<IntrospectedColumn>> entry : columns
                 .entrySet()) {
             ActualTableName atn = entry.getKey();
-
             // we only use the returned catalog and schema if something was
             // actually
             // specified on the table configuration. If something was returned
@@ -592,19 +592,27 @@ public class DatabaseIntrospector {
             // table
             // configuration, then some sort of DB default is being returned
             // and we don't want that in our SQL
-            FullyQualifiedTable table = new FullyQualifiedTable(
-                    stringHasValue(tc.getCatalog()) ? atn
-                            .getCatalog() : null,
-                    stringHasValue(tc.getSchema()) ? atn
-                            .getSchema() : null,
-                    atn.getTableName(),
-                    tc.getDomainObjectName(),
-                    tc.getAlias(),
-                    isTrue(tc.getProperty(PropertyRegistry.TABLE_IGNORE_QUALIFIERS_AT_RUNTIME)),
-                    tc.getProperty(PropertyRegistry.TABLE_RUNTIME_CATALOG),
-                    tc.getProperty(PropertyRegistry.TABLE_RUNTIME_SCHEMA),
-                    tc.getProperty(PropertyRegistry.TABLE_RUNTIME_TABLE_NAME),
-                    delimitIdentifiers, context);
+            FullyQualifiedTable table = null;
+            //获取表信息
+            Statement stmt = databaseMetaData.getConnection().createStatement();
+            ResultSet rs = stmt.executeQuery("SHOW TABLE STATUS LIKE '"+atn.getTableName()+"'");
+            while (rs.next()){
+                table = new FullyQualifiedTable(
+                        stringHasValue(tc.getCatalog()) ? atn
+                                .getCatalog() : null,
+                        stringHasValue(tc.getSchema()) ? atn
+                                .getSchema() : null,
+                        atn.getTableName(),
+                        tc.getDomainObjectName(),
+                        tc.getAlias(),
+                        isTrue(tc.getProperty(PropertyRegistry.TABLE_IGNORE_QUALIFIERS_AT_RUNTIME)),
+                        tc.getProperty(PropertyRegistry.TABLE_RUNTIME_CATALOG),
+                        tc.getProperty(PropertyRegistry.TABLE_RUNTIME_SCHEMA),
+                        tc.getProperty(PropertyRegistry.TABLE_RUNTIME_TABLE_NAME),
+                        delimitIdentifiers, context,rs.getString("COMMENT"));
+            }
+            closeResultSet(rs);
+            stmt.close();
 
             IntrospectedTable introspectedTable = ObjectFactory
                     .createIntrospectedTable(tc, table, context);

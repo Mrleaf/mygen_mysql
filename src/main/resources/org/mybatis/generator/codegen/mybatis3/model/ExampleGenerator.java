@@ -23,6 +23,7 @@ import static org.mybatis.generator.internal.util.messages.Messages.getString;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import org.mybatis.generator.api.CommentGenerator;
 import org.mybatis.generator.api.FullyQualifiedTable;
@@ -64,6 +65,9 @@ public class ExampleGenerator extends AbstractJavaGenerator {
         FullyQualifiedJavaType type = new FullyQualifiedJavaType(
                 introspectedTable.getExampleType());
         TopLevelClass topLevelClass = new TopLevelClass(type);
+        //ApiModel leaf
+        topLevelClass.addJavaDocLine("@ApiModel(value=\""+table.getDomainObjectName()
+                +"Criteria\",description=\""+table.getRemarks()+"\")");
         topLevelClass.setVisibility(JavaVisibility.PUBLIC);
         commentGenerator.addJavaFileComment(topLevelClass);
 
@@ -259,18 +263,15 @@ if(!my){
                 .getNonBLOBColumns()) {
     		FullyQualifiedJavaType fqjt = introspectedColumn.getFullyQualifiedJavaType();
     		String property = introspectedColumn.getJavaProperty();
-    		
             topLevelClass.addImportedType(fqjt);
-            
-            
-            
-            addField(topLevelClass, fqjt, property);
-            addField(topLevelClass, fqjt, property+"Min");
-            addField(topLevelClass, fqjt, property+"Max");
+            //字段备注  leaf
+            addField(topLevelClass,introspectedColumn, fqjt, property);
+            addField(topLevelClass,introspectedColumn, fqjt, property+"Min");
+            addField(topLevelClass,introspectedColumn, fqjt, property+"Max");
             
             if (introspectedColumn.isJdbcCharacterColumn() || introspectedColumn.isStringColumn()  || introspectedColumn.isIntegerNumber() ) {
             	FullyQualifiedJavaType listfqjt = new FullyQualifiedJavaType("java.util.List<"+fqjt.getFullyQualifiedName()+">");
-            	addField(topLevelClass, listfqjt, property+"List");
+            	addField(topLevelClass,introspectedColumn,listfqjt, property+"List");
             }
 
     	}
@@ -281,15 +282,22 @@ if(!my){
                 .getStringInstance());
     }
     
-    private void addField(TopLevelClass topLevelClass, FullyQualifiedJavaType fqjt, String property){
+    private void addField(TopLevelClass topLevelClass,IntrospectedColumn introspectedColumn,
+                          FullyQualifiedJavaType fqjt, String property){
         // add field, getter, setter for Fields.
         Field field = new Field();
         field.setVisibility(JavaVisibility.PROTECTED);
         field.setType(fqjt);
         field.setName(property); //$NON-NLS-1$
+        //ApiModelProperty    leaf
+        boolean isMatch = Pattern.matches(".*(List|Max|Min).*",property);
+        if(isMatch){
+            field.addJavaDocLine("@ApiModelProperty(hidden=true)");
+        }else{
+            field.addJavaDocLine("@ApiModelProperty(value=\""+introspectedColumn.getRemarks()+"\")");
+        }
         topLevelClass.addField(field);
 
-        
         {
             Method method = new Method();
             method.setVisibility(JavaVisibility.PUBLIC);

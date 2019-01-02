@@ -52,6 +52,10 @@ public class FullyQualifiedTable {
     private String beginningDelimiter;
 
     private String endingDelimiter;
+    /*
+     * 备注 leaf
+     */
+    private String remarks;
 
     /**
      * This object is used to hold information related to the table itself, not
@@ -117,7 +121,7 @@ public class FullyQualifiedTable {
             String domainObjectName, String alias,
             boolean ignoreQualifiersAtRuntime, String runtimeCatalog,
             String runtimeSchema, String runtimeTableName,
-            boolean delimitIdentifiers, Context context) {
+            boolean delimitIdentifiers, Context context,String remarks) {
         super();
         this.introspectedCatalog = introspectedCatalog;
         this.introspectedSchema = introspectedSchema;
@@ -126,6 +130,7 @@ public class FullyQualifiedTable {
         this.runtimeCatalog = runtimeCatalog;
         this.runtimeSchema = runtimeSchema;
         this.runtimeTableName = runtimeTableName;
+        this.remarks = remarks;
         
         if (stringHasValue(domainObjectName)) {
             int index = domainObjectName.lastIndexOf('.');
@@ -160,7 +165,9 @@ public class FullyQualifiedTable {
     public String getIntrospectedTableName() {
         return introspectedTableName;
     }
-
+    public String getRemarks(){
+        return remarks;
+    }
     /**
      * @return
      */

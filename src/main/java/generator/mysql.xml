@@ -18,9 +18,10 @@
 		<plugin type="org.mybatis.generator.plugins.SerializablePlugin4Criteria">
 			<property name="suppressJavaInterface" value="false"/>
 		</plugin>
-		
-		<plugin type="org.mybatis.generator.plugins.HumanReadableCommentPlugin"></plugin>
-		
+		<!--javadoc -->
+		<!--<plugin type="org.mybatis.generator.plugins.HumanReadableCommentPlugin"></plugin>-->
+		<!--Swagger api -->
+		<plugin type="org.mybatis.generator.plugins.SwaggerCommentPlugin"></plugin>
 		 <!--<plugin type="org.mybatis.generator.plugins.MysqlKeyAutoIncrementPlugin"></plugin>-->
 		
 		<commentGenerator>
@@ -29,7 +30,7 @@
 		</commentGenerator>
 
 		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
-						connectionURL="jdbc:mysql://192.168.11.228:3306/TJSCJG?useUnicode=true&amp;characterEncoding=UTF-8" userId="admin"
+						connectionURL="jdbc:mysql://192.168.11.247:3306/supervise?useUnicode=true&amp;characterEncoding=UTF-8" userId="admin"
 						password="admin">
 			<!-- 针对mysql数据库 注解-->
     		<property name="useInformationSchema" value="true"></property>
@@ -53,35 +54,35 @@
 		</javaClientGenerator>
 
 
-		<table  tableName="dic_department"   domainObjectName="DicDepartment"/>
-		<table  tableName="key_entity_cancelled"   domainObjectName="KeyEntityCancelled"/>
-		<table  tableName="key_entity_info"   domainObjectName="KeyEntityInfo"/>
-		<table  tableName="key_entity_station"   domainObjectName="KeyEntityStation"/>
-		<table  tableName="key_entity_type"   domainObjectName="KeyEntityType"/>
-		<table  tableName="sys_dictionary"   domainObjectName="SysDictionary"/>
-		<table  tableName="sys_log"   domainObjectName="SysLog"/>
-		<table  tableName="sys_user"   domainObjectName="SysUser"/>
-		<table  tableName="t_complaints_consult"   domainObjectName="TComplaintsConsult"/>
-		<table  tableName="t_complaints_consumenature"   domainObjectName="TComplaintsConsumenature"/>
-		<table  tableName="t_complaints_consumetype"   domainObjectName="TComplaintsConsumetype"/>
-		<table  tableName="t_complaints_crimetype"   domainObjectName="TComplaintsCrimetype"/>
-		<table  tableName="t_complaints_history"   domainObjectName="TComplaintsHistory"/>
-		<table  tableName="t_complaints_info"   domainObjectName="TComplaintsInfo"/>
-		<table  tableName="t_complaints_items"   domainObjectName="TComplaintsItems"/>
-		<table  tableName="t_complaints_laws"   domainObjectName="TComplaintsLaws"/>
-		<table  tableName="t_complaints_mitigation"   domainObjectName="TComplaintsMitigation"/>
-		<table  tableName="t_complaints_punlish"   domainObjectName="TComplaintsPunlish"/>
-		<table  tableName="t_complaints_status"   domainObjectName="TComplaintsStatus"/>
-		<table  tableName="t_complaints_violate"   domainObjectName="TComplaintsViolate"/>
-		<table  tableName="t_file_info"   domainObjectName="TFileInfo"/>
-		<table  tableName="t_law_menu"   domainObjectName="TLawMenu"/>
-		<table  tableName="t_task_check_groups_bak"   domainObjectName="TTaskCheckGroupsBak"/>
-		<table  tableName="t_task_check_item"   domainObjectName="TTaskCheckItem"/>
+		<!--<table  tableName="dic_department"   domainObjectName="DicDepartment"/>-->
+		<!--<table  tableName="key_entity_cancelled"   domainObjectName="KeyEntityCancelled"/>-->
+		<!--<table  tableName="key_entity_info"   domainObjectName="KeyEntityInfo"/>-->
+		<!--<table  tableName="key_entity_station"   domainObjectName="KeyEntityStation"/>-->
+		<!--<table  tableName="key_entity_type"   domainObjectName="KeyEntityType"/>-->
+		<!--<table  tableName="sys_dictionary"   domainObjectName="SysDictionary"/>-->
+		<!--<table  tableName="sys_log"   domainObjectName="SysLog"/>-->
+		<!--<table  tableName="sys_user"   domainObjectName="SysUser"/>-->
+		<!--<table  tableName="t_complaints_consult"   domainObjectName="TComplaintsConsult"/>-->
+		<!--<table  tableName="t_complaints_consumenature"   domainObjectName="TComplaintsConsumenature"/>-->
+		<!--<table  tableName="t_complaints_consumetype"   domainObjectName="TComplaintsConsumetype"/>-->
+		<!--<table  tableName="t_complaints_crimetype"   domainObjectName="TComplaintsCrimetype"/>-->
+		<!--<table  tableName="t_complaints_history"   domainObjectName="TComplaintsHistory"/>-->
+		<!--<table  tableName="t_complaints_info"   domainObjectName="TComplaintsInfo"/>-->
+		<!--<table  tableName="t_complaints_items"   domainObjectName="TComplaintsItems"/>-->
+		<!--<table  tableName="t_complaints_laws"   domainObjectName="TComplaintsLaws"/>-->
+		<!--<table  tableName="t_complaints_mitigation"   domainObjectName="TComplaintsMitigation"/>-->
+		<!--<table  tableName="t_complaints_punlish"   domainObjectName="TComplaintsPunlish"/>-->
+		<!--<table  tableName="t_complaints_status"   domainObjectName="TComplaintsStatus"/>-->
+		<!--<table  tableName="t_complaints_violate"   domainObjectName="TComplaintsViolate"/>-->
+		<!--<table  tableName="t_file_info"   domainObjectName="TFileInfo"/>-->
+		<!--<table  tableName="t_law_menu"   domainObjectName="TLawMenu"/>-->
+		<!--<table  tableName="t_task_check_groups_bak"   domainObjectName="TTaskCheckGroupsBak"/>-->
+		<!--<table  tableName="t_task_check_item"   domainObjectName="TTaskCheckItem"/>-->
 		<table  tableName="t_task_entity"   domainObjectName="TTaskEntity"/>
-		<table  tableName="t_task_info"   domainObjectName="TTaskInfo"/>
-		<table  tableName="t_task_items"   domainObjectName="TTaskItems"/>
-		<table  tableName="t_task_log"   domainObjectName="TTaskLog"/>
-		<table  tableName="t_task_result"   domainObjectName="TTaskResult"/>
+		<!--<table  tableName="t_task_info"   domainObjectName="TTaskInfo"/>-->
+		<!--<table  tableName="t_task_items"   domainObjectName="TTaskItems"/>-->
+		<!--<table  tableName="t_task_log"   domainObjectName="TTaskLog"/>-->
+		<!--<table  tableName="t_task_result"   domainObjectName="TTaskResult"/>-->
 
 
 	
