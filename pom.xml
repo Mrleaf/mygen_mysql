@@ -6,7 +6,7 @@
 
     <groupId>mygen_mysql</groupId>
     <artifactId>mygen_mysql</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
     <build>
         <resources>
             <resource>
