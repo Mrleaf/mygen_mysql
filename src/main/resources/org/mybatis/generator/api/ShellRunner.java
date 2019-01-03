@@ -49,6 +49,9 @@ public class ShellRunner {
     private static final String FORCE_JAVA_LOGGING = "-forceJavaLogging"; //$NON-NLS-1$
     private static final String HELP_1 = "-?"; //$NON-NLS-1$
     private static final String HELP_2 = "-h"; //$NON-NLS-1$
+    public static final String SWAGGER2 = "-swagger2"; //leaf swagger2
+
+    public static Map<String, String> ARGUMENTS = null;//leaf
 
     public static MyBatisGenerator main(String[] args) {
         if (args.length == 0) {
@@ -56,23 +59,23 @@ public class ShellRunner {
             System.exit(0);
             return null; // only to satisfy compiler, never returns leaf
         }
+        //leaf
+        ARGUMENTS = parseCommandLine(args);
 
-        Map<String, String> arguments = parseCommandLine(args);
-
-        if (arguments.containsKey(HELP_1)) {
+        if (ARGUMENTS.containsKey(HELP_1)) {
             usage();
             System.exit(0);
             return null; // only to satisfy compiler, never returns leaf
         }
 
-        if (!arguments.containsKey(CONFIG_FILE)) {
+        if (!ARGUMENTS.containsKey(CONFIG_FILE)) {
             writeLine(getString("RuntimeError.0")); //$NON-NLS-1$
             return null;//leaf
         }
 
         List<String> warnings = new ArrayList<String>();
 
-        String configfile = arguments.get(CONFIG_FILE);
+        String configfile = ARGUMENTS.get(CONFIG_FILE);
         File configurationFile = new File(configfile);
         if (!configurationFile.exists()) {
             writeLine(getString("RuntimeError.1", configfile)); //$NON-NLS-1$
@@ -80,8 +83,8 @@ public class ShellRunner {
         }
 
         Set<String> fullyqualifiedTables = new HashSet<String>();
-        if (arguments.containsKey(TABLES)) {
-            StringTokenizer st = new StringTokenizer(arguments.get(TABLES), ","); //$NON-NLS-1$
+        if (ARGUMENTS.containsKey(TABLES)) {
+            StringTokenizer st = new StringTokenizer(ARGUMENTS.get(TABLES), ","); //$NON-NLS-1$
             while (st.hasMoreTokens()) {
                 String s = st.nextToken().trim();
                 if (s.length() > 0) {
@@ -91,9 +94,9 @@ public class ShellRunner {
         }
 
         Set<String> contexts = new HashSet<String>();
-        if (arguments.containsKey(CONTEXT_IDS)) {
+        if (ARGUMENTS.containsKey(CONTEXT_IDS)) {
             StringTokenizer st = new StringTokenizer(
-                    arguments.get(CONTEXT_IDS), ","); //$NON-NLS-1$
+                    ARGUMENTS.get(CONTEXT_IDS), ","); //$NON-NLS-1$
             while (st.hasMoreTokens()) {
                 String s = st.nextToken().trim();
                 if (s.length() > 0) {
@@ -107,11 +110,11 @@ public class ShellRunner {
             Configuration config = cp.parseConfiguration(configurationFile);
 
             DefaultShellCallback shellCallback = new DefaultShellCallback(
-                    arguments.containsKey(OVERWRITE));
+                    ARGUMENTS.containsKey(OVERWRITE));
 
             myBatisGenerator = new MyBatisGenerator(config, shellCallback, warnings);
 
-            ProgressCallback progressCallback = arguments.containsKey(VERBOSE) ? new VerboseProgressCallback()
+            ProgressCallback progressCallback = ARGUMENTS.containsKey(VERBOSE) ? new VerboseProgressCallback()
                     : null;
 
             myBatisGenerator.generate(progressCallback, contexts, fullyqualifiedTables);
@@ -210,6 +213,8 @@ public class ShellRunner {
                     errors.add(getString("RuntimeError.19", TABLES)); //$NON-NLS-1$
                 }
                 i++;
+            }else if (SWAGGER2.equalsIgnoreCase(args[i])) {
+               arguments.put(SWAGGER2, args[i]);
             } else {
                 errors.add(getString("RuntimeError.20", args[i])); //$NON-NLS-1$
             }

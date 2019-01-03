@@ -50,7 +50,9 @@ public class Mybatis3CodeGenerator {
 			URL config = Mybatis3CodeGenerator.class.getResource(path);
 			//防止中文路径乱码
 			System.out.println(java.net.URLDecoder.decode(config.getFile(), "utf-8"));
-			String[] arg = {"-configfile", java.net.URLDecoder.decode(config.getFile(), "utf-8"), "-overwrite"};
+			//"-swagger2"
+			String[] arg = {"-configfile", java.net.URLDecoder.decode(config.getFile(), "utf-8"),
+					"-overwrite","-swagger2"};
 			MyBatisGenerator generator =  ShellRunner.main(arg);
 			//防止中文路径乱码
 //			String path1 = "E:/MyWork/mygen_mysql/target/TS";

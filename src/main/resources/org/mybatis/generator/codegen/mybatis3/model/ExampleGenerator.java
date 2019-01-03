@@ -25,10 +25,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import org.mybatis.generator.api.CommentGenerator;
-import org.mybatis.generator.api.FullyQualifiedTable;
-import org.mybatis.generator.api.IntrospectedColumn;
-import org.mybatis.generator.api.IntrospectedTable;
+import org.mybatis.generator.api.*;
 import org.mybatis.generator.api.dom.OutputUtilities;
 import org.mybatis.generator.api.dom.java.CompilationUnit;
 import org.mybatis.generator.api.dom.java.Field;
@@ -65,9 +62,11 @@ public class ExampleGenerator extends AbstractJavaGenerator {
         FullyQualifiedJavaType type = new FullyQualifiedJavaType(
                 introspectedTable.getExampleType());
         TopLevelClass topLevelClass = new TopLevelClass(type);
-        //ApiModel leaf
-        topLevelClass.addJavaDocLine("@ApiModel(value=\""+table.getDomainObjectName()
-                +"Criteria\",description=\""+table.getRemarks()+"\")");
+        if(ShellRunner.ARGUMENTS.containsKey(ShellRunner.SWAGGER2)){
+            //生成ApiModel leaf
+            topLevelClass.addJavaDocLine("@ApiModel(value=\""+table.getDomainObjectName()
+                    +"Criteria\",description=\""+table.getRemarks()+"\")");
+        }
         topLevelClass.setVisibility(JavaVisibility.PUBLIC);
         commentGenerator.addJavaFileComment(topLevelClass);
 
@@ -289,12 +288,14 @@ if(!my){
         field.setVisibility(JavaVisibility.PROTECTED);
         field.setType(fqjt);
         field.setName(property); //$NON-NLS-1$
-        //ApiModelProperty    leaf
-        boolean isMatch = Pattern.matches(".*(List|Max|Min).*",property);
-        if(isMatch){
-            field.addJavaDocLine("@ApiModelProperty(hidden=true)");
-        }else{
-            field.addJavaDocLine("@ApiModelProperty(value=\""+introspectedColumn.getRemarks()+"\")");
+        if(ShellRunner.ARGUMENTS.containsKey(ShellRunner.SWAGGER2)){
+            //生成ApiModelProperty    leaf
+            boolean isMatch = Pattern.matches(".*(List|Max|Min).*",property);
+            if(isMatch){
+                field.addJavaDocLine("@ApiModelProperty(hidden=true)");
+            }else{
+                field.addJavaDocLine("@ApiModelProperty(value=\""+introspectedColumn.getRemarks()+"\")");
+            }
         }
         topLevelClass.addField(field);
 
