@@ -90,6 +90,10 @@ public class ExampleGenerator extends AbstractJavaGenerator {
         field.setType(FullyQualifiedJavaType.getStringInstance());
         field.setName("orderByClause"); //$NON-NLS-1$
         commentGenerator.addFieldComment(field, introspectedTable);
+        if(ShellRunner.ARGUMENTS.containsKey(ShellRunner.SWAGGER2)){
+            //生成ApiModelProperty leaf
+            field.addJavaDocLine("@ApiModelProperty(hidden=true)");
+        }
         topLevelClass.addField(field);
 
         method = new Method();
@@ -115,6 +119,10 @@ public class ExampleGenerator extends AbstractJavaGenerator {
         field.setType(FullyQualifiedJavaType.getBooleanPrimitiveInstance());
         field.setName("distinct"); //$NON-NLS-1$
         commentGenerator.addFieldComment(field, introspectedTable);
+        if(ShellRunner.ARGUMENTS.containsKey(ShellRunner.SWAGGER2)){
+            //生成ApiModelProperty leaf
+            field.addJavaDocLine("@ApiModelProperty(hidden=true)");
+        }
         topLevelClass.addField(field);
 
         method = new Method();
