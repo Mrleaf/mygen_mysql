@@ -20,6 +20,7 @@ import java.util.Properties;
 
 import org.mybatis.generator.api.PluginAdapter;
 import org.mybatis.generator.api.IntrospectedTable;
+import org.mybatis.generator.api.ShellRunner;
 import org.mybatis.generator.api.dom.java.Field;
 import org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;
 import org.mybatis.generator.api.dom.java.JavaVisibility;
@@ -42,11 +43,19 @@ public class SerializablePlugin extends PluginAdapter {
 
     private FullyQualifiedJavaType serializable;
     private FullyQualifiedJavaType gwtSerializable;
+    private FullyQualifiedJavaType swaggerApiModel;//leaf
+    private FullyQualifiedJavaType swaggerApiModelProperty;//leaf
+
     private boolean addGWTInterface;
     private boolean suppressJavaInterface;
 
     public SerializablePlugin() {
         super();
+        if(ShellRunner.ARGUMENTS.containsKey(ShellRunner.SWAGGER2)){
+            //引入swagger包 leaf
+            swaggerApiModel = new FullyQualifiedJavaType("io.swagger.annotations.ApiModel");
+            swaggerApiModelProperty = new FullyQualifiedJavaType("io.swagger.annotations.ApiModelProperty");
+        }
         serializable = new FullyQualifiedJavaType("java.io.Serializable"); //$NON-NLS-1$
         gwtSerializable = new FullyQualifiedJavaType("com.google.gwt.user.client.rpc.IsSerializable"); //$NON-NLS-1$
     }
@@ -86,6 +95,12 @@ public class SerializablePlugin extends PluginAdapter {
 
     protected void makeSerializable(TopLevelClass topLevelClass,
             IntrospectedTable introspectedTable) {
+        if(ShellRunner.ARGUMENTS.containsKey(ShellRunner.SWAGGER2)){
+            //引入swagger包 leaf
+            topLevelClass.addImportedType(swaggerApiModel);
+            topLevelClass.addImportedType(swaggerApiModelProperty);
+        }
+
         if (addGWTInterface) {
             topLevelClass.addImportedType(gwtSerializable);
             topLevelClass.addSuperInterface(gwtSerializable);
